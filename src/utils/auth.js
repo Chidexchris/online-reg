@@ -1,9 +1,13 @@
-export function getCurrentUser() {
-  if (!window.netlifyIdentity) return null;
-  return window.netlifyIdentity.currentUser();
-}
+// src/utils/auth.js
 
-export function getUserRole() {
-  const user = getCurrentUser();
-  return user?.app_metadata?.roles?.[0] || "student";
-}
+export const setToken = (token) => {
+  localStorage.setItem("token", token);
+};
+
+export const getToken = () => {
+  return localStorage.getItem("token");
+};
+
+export const logout = () => {
+  localStorage.removeItem("token");
+};

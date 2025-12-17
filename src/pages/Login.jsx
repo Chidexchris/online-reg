@@ -1,43 +1,77 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { setToken } from "../utils/auth";
 
 function Login() {
-  useEffect(() => {
-    if (!window.netlifyIdentity) return;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
-    window.netlifyIdentity.on("login", user => {
-      const role = user.app_metadata?.roles?.[0];
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
 
-      if (role === "admin") {
-        window.location.href = "/admin/dashboard";
+    if (!email || !password) {
+      setError("Please fill in all fields");
+      return;
+    }
+
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/auth/login",
+        { email, password }
+      );
+
+      setToken(res.data.token);
+
+      // Redirect based on role
+      if (res.data.role === "admin") {
+        navigate("/admin/dashboard");
       } else {
-        window.location.href = "/courses";
+        navigate("/");
       }
-    });
-  }, []);
+    } catch (err) {
+      setError("Invalid email or password");
+    }
+  };
 
   return (
     <div className="page-wrapper">
-      <div className="position-relative overflow-hidden min-vh-100 d-flex align-items-center justify-content-center">
-        <div className="card col-md-6 col-lg-4">
-          <div className="card-body">
-            <Link to="/" className="text-center d-block mb-3">
-              <img src="../assets/images/logos/logo.svg" alt="logo" />
-            </Link>
+      <div className="min-vh-100 d-flex align-items-center justify-content-center">
+        <div className="card p-4" style={{ width: 400 }}>
+          <h4 className="text-center mb-3">Login</h4>
 
-            <p className="text-center">Sign in to your account</p>
+          {error && <div className="alert alert-danger">{error}</div>}
 
-            <button
-              className="btn btn-primary w-100"
-              onClick={() => window.netlifyIdentity.open("login")}
-            >
-              Sign In
-            </button>
-
-            <div className="text-center mt-3">
-              <Link to="/register">Create an account</Link>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label>Email</label>
+              <input
+                className="form-control"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
             </div>
-          </div>
+
+            <div className="mb-3">
+              <label>Password</label>
+              <input
+                className="form-control"
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <button className="btn btn-primary w-100">Login</button>
+          </form>
+
+          <p className="text-center mt-3">
+            No account? <Link to="/register">Register</Link>
+          </p>
         </div>
       </div>
     </div>

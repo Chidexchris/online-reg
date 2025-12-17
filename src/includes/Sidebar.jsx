@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "/assets/images/logos/logo.svg";
 import Courses from "../pages/user/Courses";
+import { logout } from "../utils/auth";
 
 function Sidebar() {
   return (
@@ -57,7 +58,7 @@ function Sidebar() {
               <li className="sidebar-item">
                 <Link
                   className="sidebar-link justify-content-between"
-                  to="/MyRegistration"
+                  to="/my-registrations"
                 >
                   <div className="d-flex align-items-center gap-3">
                     <span className="d-flex">
@@ -81,7 +82,7 @@ function Sidebar() {
               </li>
 
               {/* Logout */}
-              <li className="sidebar-item">
+              <li className="sidebar-item" onClick={logout}>
                 <Link className="sidebar-link justify-content-between" to="#">
                   <div className="d-flex align-items-center gap-3">
                     <span className="hide-menu">Log out</span>

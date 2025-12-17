@@ -56,7 +56,7 @@ function Sidebar() {
                   <li className="sidebar-item">
                     <Link
                       className="sidebar-link justify-content-between"
-                      to="/courses/registered"
+                      to="/admin/registered"
                     >
                       <div className="d-flex align-items-center gap-3">
                         <div className="round-16 d-flex align-items-center justify-content-center">
@@ -69,7 +69,7 @@ function Sidebar() {
                   <li className="sidebar-item">
                     <Link
                       className="sidebar-link justify-content-between"
-                      to="/courses/pending"
+                      to="/admin/pending"
                     >
                       <div className="d-flex align-items-center gap-3">
                         <div className="round-16 d-flex align-items-center justify-content-center">
@@ -82,7 +82,7 @@ function Sidebar() {
                   <li className="sidebar-item">
                     <Link
                       className="sidebar-link justify-content-between"
-                      to="/courses/all"
+                      to="/admin/courses"
                     >
                       <div className="d-flex align-items-center gap-3">
                         <div className="round-16 d-flex align-items-center justify-content-center">

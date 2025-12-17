@@ -11,9 +11,11 @@ import AdminDashboard from "./pages/admin/Dashboard";
 import AdminCourses from "./pages/admin/Courses";
 import AdminPending from "./pages/admin/Pending";
 import AdminStudents from "./pages/admin/Students";
+import AdminRegistered from "./pages/admin/Registered";
 
-import ProtectedRoute from "./routes/ProtectedRoute";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Unauthorized from "./pages/Unauthorized";
+
 
 function App() {
   return (
@@ -75,6 +77,14 @@ function App() {
           element={
             <ProtectedRoute role="admin">
               <AdminPending />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/registered"
+          element={
+            <ProtectedRoute role="admin">
+              <AdminRegistered />
             </ProtectedRoute>
           }
         />
