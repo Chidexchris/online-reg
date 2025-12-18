@@ -30,7 +30,7 @@ if (process.env.NODE_ENV === "production") {
   // Adjust this path if your client/build is in a different location
   // Common monorepo setups: "../client/build" or "../../client/build"
   const buildPath = path.join(__dirname, "../client/build");
-
+console.log('Serving static files from:', buildPath);  // Add this for debugging
   // Serve static files (JS, CSS, images, etc.)
   app.use(express.static(buildPath));
 
