@@ -2,6 +2,11 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'
 import App from './App.jsx'
+import $ from 'jquery';
+window.$ = window.jQuery = $;  // Make it global
+
+// If using Bootstrap JS that depends on jQuery
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
