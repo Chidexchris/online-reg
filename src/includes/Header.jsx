@@ -1,48 +1,72 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { useLoading } from '../context/LoadingContext';
 
 function Header() {
+  const navigate = useNavigate();
+  const { triggerLoading } = useLoading();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
+
   return (
     <>
-      <header className="app-header top-0">
-        <nav className="navbar navbar-expand-lg navbar-light">
-          <ul className="navbar-nav">
+      <header className="app-header position-sticky top-0 glass shadow-sm" style={{ zIndex: 10 }}>
+        <nav className="navbar navbar-expand-lg navbar-light px-4 py-3">
+          <ul className="navbar-nav align-items-center">
             <li className="nav-item d-block d-xl-none">
-              <a className="nav-link sidebartoggler " id="headerCollapse" href="javascript:void(0)">
-                <i className="ti ti-menu-2"></i>
+              <a className="nav-link sidebartoggler p-2 rounded-circle" id="headerCollapse" href="javascript:void(0)">
+                <i className="ti ti-menu-2 fs-6"></i>
               </a>
             </li>
-            <li className="nav-item dropdown">
-              <a className="nav-link " href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown" aria-expanded="false">
-                <i className="ti ti-bell"></i>
-                <div className="notification bg-primary rounded-circle"></div>
-              </a>
-              <div className="dropdown-menu dropdown-menu-animate-up" aria-labelledby="drop1">
-                <div className="message-body">
-                  <a href="javascript:void(0)" className="dropdown-item">
-                    Item 1
-                  </a>
-                  <a href="javascript:void(0)" className="dropdown-item">
-                    Item 2
-                  </a>
-                </div>
+            <li className="nav-item d-none d-lg-block">
+              <div className="input-group bg-light rounded-pill px-3" style={{ width: 300 }}>
+                <span className="input-group-text bg-transparent border-0"><i className="ti ti-search text-muted"></i></span>
+                <input type="text" className="form-control bg-transparent border-0 small" placeholder="Search resources..." style={{ boxShadow: 'none' }} />
               </div>
             </li>
+            <li className="nav-item d-none d-lg-block ms-3">
+              <button
+                className="btn btn-light rounded-circle shadow-none p-2"
+                onClick={() => triggerLoading(1500)}
+                title="Refresh Data"
+              >
+                <i className="ti ti-refresh text-primary"></i>
+              </button>
+            </li>
           </ul>
+
           <div className="navbar-collapse justify-content-end px-0" id="navbarNav">
-            <ul className="navbar-nav flex-row ms-auto align-items-center justify-content-end">
-              
+            <ul className="navbar-nav flex-row ms-auto align-items-center justify-content-end gap-3">
               <li className="nav-item dropdown">
-                <a className="nav-link " href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown"
-                  aria-expanded="false">
-                  <img src="../assets/images/profile/user-1.jpg" alt="" width="35" height="35" className="rounded-circle" />
+                <a className="nav-link p-2 bg-light rounded-circle shadow-none" href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown">
+                  <i className="ti ti-bell-ringing fs-5 text-primary"></i>
+                  <div className="notification bg-danger rounded-circle position-absolute" style={{ width: 8, height: 8, top: 8, right: 8, border: '2px solid white' }}></div>
                 </a>
-                <div className="dropdown-menu dropdown-menu-end dropdown-menu-animate-up" aria-labelledby="drop2">
+              </li>
+
+              <li className="nav-item dropdown">
+                <a className="nav-link d-flex align-items-center gap-2 p-1 pe-3 bg-light rounded-pill shadow-none" href="javascript:void(0)" id="drop2" data-bs-toggle="dropdown">
+                  <img src="../assets/images/profile/user-1.jpg" alt="" width="32" height="32" className="rounded-circle shadow-sm" />
+                  <span className="small fw-bold text-dark d-none d-md-block">My Account</span>
+                  <i className="ti ti-chevron-down small text-muted"></i>
+                </a>
+                <div className="dropdown-menu dropdown-menu-end premium-card border-0 p-3 mt-2 shadow-lg animate-up">
                   <div className="message-body">
-                    <a href="javascript:void(0)" className="d-flex align-items-center gap-2 dropdown-item">
-                      <i className="ti ti-user fs-6"></i>
-                      <p className="mb-0 fs-3">My Profile</p>
+                    <a href="javascript:void(0)" className="d-flex align-items-center gap-3 py-2 px-3 dropdown-item rounded-3">
+                      <i className="ti ti-user fs-5 text-primary"></i>
+                      <p className="mb-0 small fw-semibold">View Profile</p>
                     </a>
-                    <a href="./authentication-login.html" className="btn btn-outline-primary mx-3 mt-2 d-block">Logout</a>
+                    <a href="javascript:void(0)" className="d-flex align-items-center gap-3 py-2 px-3 dropdown-item rounded-3">
+                      <i className="ti ti-settings fs-5 text-secondary"></i>
+                      <p className="mb-0 small fw-semibold">Settings</p>
+                    </a>
+                    <hr className="my-2 opacity-50" />
+                    <button onClick={handleLogout} className="btn btn-outline-danger w-100 mt-2 py-2 rounded-3 border-0 bg-danger bg-opacity-10 text-danger fw-bold small">
+                      Log Out
+                    </button>
                   </div>
                 </div>
               </li>

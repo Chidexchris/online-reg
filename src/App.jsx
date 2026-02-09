@@ -1,4 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { LoadingProvider } from "./context/LoadingContext";
+import Preloader from "./components/Preloader";
+import PageLoader from "./components/PageLoader";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -19,91 +22,95 @@ import Unauthorized from "./pages/Unauthorized";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
+    <LoadingProvider>
+      <Preloader />
+      <BrowserRouter>
+        <PageLoader />
+        <Routes>
 
-        {/* Public */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+          {/* Public */}
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
 
-        {/* Student routes */}
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/courses"
-          element={
-            <ProtectedRoute>
-              <Courses />
-            </ProtectedRoute>
-          }
-        />
+          {/* Student routes */}
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/courses"
+            element={
+              <ProtectedRoute>
+                <Courses />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/my-registrations"
-          element={
-            <ProtectedRoute>
-              <MyRegistration />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/my-registrations"
+            element={
+              <ProtectedRoute>
+                <MyRegistration />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Admin routes */}
-        <Route
-          path="/admin/dashboard"
-          element={
-            <ProtectedRoute role="admin">
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
+          {/* Admin routes */}
+          <Route
+            path="/admin/dashboard"
+            element={
+              <ProtectedRoute role="admin">
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/admin/courses"
-          element={
-            <ProtectedRoute role="admin">
-              <AdminCourses />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/admin/courses"
+            element={
+              <ProtectedRoute role="admin">
+                <AdminCourses />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/admin/pending"
-          element={
-            <ProtectedRoute role="admin">
-              <AdminPending />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin/registered"
-          element={
-            <ProtectedRoute role="admin">
-              <AdminRegistered />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/admin/pending"
+            element={
+              <ProtectedRoute role="admin">
+                <AdminPending />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/registered"
+            element={
+              <ProtectedRoute role="admin">
+                <AdminRegistered />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/admin/students"
-          element={
-            <ProtectedRoute role="admin">
-              <AdminStudents />
-            </ProtectedRoute>
-          }
-        />
-
-
-        <Route path="/unauthorized" element={<Unauthorized />} />
+          <Route
+            path="/admin/students"
+            element={
+              <ProtectedRoute role="admin">
+                <AdminStudents />
+              </ProtectedRoute>
+            }
+          />
 
 
-      </Routes>
-    </BrowserRouter>
+          <Route path="/unauthorized" element={<Unauthorized />} />
+
+
+        </Routes>
+      </BrowserRouter>
+    </LoadingProvider>
   );
 }
 

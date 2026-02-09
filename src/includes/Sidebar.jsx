@@ -1,10 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "/assets/images/logos/logo.svg";
 import Courses from "../pages/user/Courses";
 import { logout } from "../utils/auth";
 
 function Sidebar() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
   return (
     <>
       <aside className="left-sidebar top-0">
@@ -82,12 +88,15 @@ function Sidebar() {
               </li>
 
               {/* Logout */}
-              <li className="sidebar-item" onClick={logout}>
-                <Link className="sidebar-link justify-content-between" to="#">
+              <li className="sidebar-item">
+                <button
+                  className="sidebar-link justify-content-between bg-transparent border-0 w-100 text-start"
+                  onClick={handleLogout}
+                >
                   <div className="d-flex align-items-center gap-3">
                     <span className="hide-menu">Log out</span>
                   </div>
-                </Link>
+                </button>
               </li>
             </ul>
           </nav>

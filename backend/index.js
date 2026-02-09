@@ -1,3 +1,4 @@
+console.log("Starting index.js...");
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
@@ -29,6 +30,19 @@ app.get("/", (req, res) => {
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
+
+server.on('error', (error) => {
+  console.error("Server Start Error:", error);
+});
+
+process.on('exit', (code) => {
+  console.log(`Process exiting with code: ${code}`);
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+});
+

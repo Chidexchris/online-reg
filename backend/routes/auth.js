@@ -1,7 +1,7 @@
 import express from "express";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import  db  from "../db.js";
+import db from "../db.js";
 
 const router = express.Router();
 
@@ -18,8 +18,12 @@ router.post("/register", async (req, res) => {
     });
 
     res.json({ message: "User registered" });
-  } catch {
-    res.status(400).json({ message: "Email already exists" });
+  } catch (err) {
+    console.error("Registration Error:", err);
+    if (err.message && err.message.includes("UNIQUE constraint failed")) {
+      return res.status(400).json({ message: "Email already exists" });
+    }
+    res.status(500).json({ message: "Registration failed", error: err.message });
   }
 });
 

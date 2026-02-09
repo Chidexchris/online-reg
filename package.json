@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && cd client && npm install && npm run build",
+    "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "start": "node index.js"
+    "server": "cd backend && npm start",
+    "start": "npm run server"
   },
   "dependencies": {
     "@libsql/client": "^0.15.15",

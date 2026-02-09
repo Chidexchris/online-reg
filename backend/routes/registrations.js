@@ -2,6 +2,8 @@ import express from "express";
 import db from "../db.js";
 import { auth } from "../middleware/auth.js";
 
+const router = express.Router();
+
 router.post("/:id/register", auth, async (req, res) => {
   const course_id = req.params.id;
 

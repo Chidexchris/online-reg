@@ -14,11 +14,11 @@ function Courses() {
   const [unit, setUnit] = useState("");
   const [error, setError] = useState("");
 
-  // 🔹 Fetch all courses
+  // Fetch all courses
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/courses", {
+        const res = await fetch("http://localhost:5001/api/courses", {
           headers: {
             Authorization: `Bearer ${getToken()}`
           }
@@ -36,7 +36,7 @@ function Courses() {
     fetchCourses();
   }, []);
 
-  // 🔹 Add new course (ADMIN)
+  // Add new course (ADMIN)
   const handleAddCourse = async (e) => {
     e.preventDefault();
     setError("");
@@ -47,7 +47,7 @@ function Courses() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/admin/courses", {
+      const res = await fetch("http://localhost:5001/api/admin/courses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,112 +75,134 @@ function Courses() {
   };
 
   return (
-    <div
-      className="page-wrapper"
-      id="main-wrapper"
-      data-layout="vertical"
-      data-navbarbg="skin6"
-      data-sidebar-position="fixed"
-      data-header-position="fixed"
-    >
-      <SideBar />
+    <div className="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6"
+      data-sidebar-position="fixed" data-header-position="fixed">
+      <SideBar role="admin" />
 
       <div className="body-wrapper">
         <Header />
 
-        <div className="container-fluid">
-          <div className="d-flex justify-content-between align-items-center mb-3">
-            <h4>Courses</h4>
+        <div className="body-wrapper-inner p-4">
+          <div className="container-fluid">
+            <div className="d-flex justify-content-between align-items-center mb-5">
+              <div>
+                <h2 className="fw-bold text-gradient mb-1">Course Catalog</h2>
+                <p className="text-muted">Manage academic offerings and course units</p>
+              </div>
 
-            {/* ADMIN BUTTON */}
-            <button
-              className="btn btn-primary"
-              onClick={() => setShowForm(!showForm)}
-            >
-              Add Course
-            </button>
-          </div>
+              <button
+                className="btn-premium py-2 px-4 shadow-sm rounded-pill"
+                onClick={() => setShowForm(!showForm)}
+              >
+                <i className={`ti ${showForm ? 'ti-x' : 'ti-plus'} me-2`}></i>
+                {showForm ? 'Cancel' : 'Add New Course'}
+              </button>
+            </div>
 
-          {/* ADD COURSE FORM */}
-          {showForm && (
-            <div className="card mb-4">
-              <div className="card-body">
-                <h5 className="mb-3">Add New Course</h5>
-
-                {error && <div className="alert alert-danger">{error}</div>}
-
-                <form onSubmit={handleAddCourse}>
-                  <div className="mb-3">
-                    <label>Course Code</label>
-                    <input
-                      className="form-control"
-                      value={code}
-                      onChange={(e) => setCode(e.target.value)}
-                    />
+            {/* ADD COURSE FORM */}
+            {showForm && (
+              <div className="premium-card mb-5 border-0 shadow-lg animate-up">
+                <div className="card-body p-5">
+                  <div className="d-flex align-items-center gap-3 mb-4">
+                    <div className="bg-primary-light p-2 rounded-3 text-primary">
+                      <i className="ti ti-book-upload fs-6"></i>
+                    </div>
+                    <h4 className="fw-bold mb-0">Define New Course</h4>
                   </div>
 
-                  <div className="mb-3">
-                    <label>Course Title</label>
-                    <input
-                      className="form-control"
-                      value={title}
-                      onChange={(e) => setTitle(e.target.value)}
-                    />
-                  </div>
+                  {error && <div className="alert alert-danger border-0 shadow-sm mb-4">{error}</div>}
 
-                  <div className="mb-3">
-                    <label>Unit</label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      value={unit}
-                      onChange={(e) => setUnit(e.target.value)}
-                    />
-                  </div>
+                  <form onSubmit={handleAddCourse}>
+                    <div className="row g-4">
+                      <div className="col-md-4">
+                        <label className="form-label small fw-bold text-uppercase text-muted px-1">Course Code</label>
+                        <input
+                          className="form-control rounded-3 border-0 bg-light p-3"
+                          placeholder="e.g. CS101"
+                          value={code}
+                          onChange={(e) => setCode(e.target.value)}
+                        />
+                      </div>
 
-                  <button className="btn btn-success">Save Course</button>
-                </form>
+                      <div className="col-md-5">
+                        <label className="form-label small fw-bold text-uppercase text-muted px-1">Course Title</label>
+                        <input
+                          className="form-control rounded-3 border-0 bg-light p-3"
+                          placeholder="e.g. Introduction to Programming"
+                          value={title}
+                          onChange={(e) => setTitle(e.target.value)}
+                        />
+                      </div>
+
+                      <div className="col-md-3">
+                        <label className="form-label small fw-bold text-uppercase text-muted px-1">Credit Units</label>
+                        <input
+                          type="number"
+                          className="form-control rounded-3 border-0 bg-light p-3"
+                          placeholder="3"
+                          value={unit}
+                          onChange={(e) => setUnit(e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="mt-5 d-flex justify-content-end">
+                      <button className="btn-premium px-5 py-3 shadow-none">Save Course Configuration</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            )}
+
+            {/* COURSES TABLE */}
+            <div className="premium-card border-0 overflow-hidden">
+              <div className="p-4 border-bottom bg-light bg-opacity-50">
+                <h5 className="fw-bold mb-0">Academic Inventory</h5>
+              </div>
+              <div className="table-responsive">
+                <table className="table mb-0 align-middle">
+                  <thead className="bg-white">
+                    <tr>
+                      <th className="ps-4 py-4 text-muted small fw-bold text-uppercase border-0">#</th>
+                      <th className="py-4 text-muted small fw-bold text-uppercase border-0">Code</th>
+                      <th className="py-4 text-muted small fw-bold text-uppercase border-0">Title</th>
+                      <th className="py-4 text-muted small fw-bold text-uppercase border-0 text-center">Unit</th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    {loading ? (
+                      <tr>
+                        <td colSpan="4" className="py-5 text-center">
+                          <div className="spinner-border text-primary spinner-border-sm me-2"></div>
+                          <span className="text-muted">Loading inventory...</span>
+                        </td>
+                      </tr>
+                    ) : courses.length === 0 ? (
+                      <tr>
+                        <td colSpan="4" className="py-5 text-center">
+                          <i className="ti ti-database-off d-block fs-8 text-muted opacity-25 mb-2"></i>
+                          <p className="text-muted mb-0">No courses registered yet</p>
+                        </td>
+                      </tr>
+                    ) : (
+                      courses.map((course, index) => (
+                        <tr key={course.id} className="border-bottom hover-bg-light transition-all">
+                          <td className="ps-4 py-4 fw-bold text-muted">{index + 1}</td>
+                          <td className="py-4">
+                            <span className="badge bg-primary-light text-primary px-3 py-2 rounded-3 fw-bold">{course.code}</span>
+                          </td>
+                          <td className="py-4 fw-bold">{course.title}</td>
+                          <td className="py-4 text-center">
+                            <span className="fw-bold text-secondary">{course.unit}</span>
+                          </td>
+                        </tr>
+                      ))
+                    )}
+                  </tbody>
+                </table>
               </div>
             </div>
-          )}
-
-          {/* COURSES TABLE */}
-          <div className="table-responsive">
-            <table className="table table-bordered table-hover">
-              <thead className="table-light">
-                <tr>
-                  <th>#</th>
-                  <th>Course Code</th>
-                  <th>Course Title</th>
-                  <th>Unit</th>
-                </tr>
-              </thead>
-
-              <tbody>
-                {loading ? (
-                  <tr>
-                    <td colSpan="4" className="text-center">
-                      Loading...
-                    </td>
-                  </tr>
-                ) : courses.length === 0 ? (
-                  <tr>
-                    <td colSpan="4" className="text-center text-muted">
-                      No courses available
-                    </td>
-                  </tr>
-                ) : (
-                  courses.map((course, index) => (
-                    <tr key={course.id}>
-                      <td>{index + 1}</td>
-                      <td>{course.code}</td>
-                      <td>{course.title}</td>
-                      <td>{course.unit}</td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
           </div>
         </div>
       </div>

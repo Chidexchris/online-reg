@@ -19,7 +19,7 @@ function Register() {
     }
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/register", {
+      const res = await fetch("http://localhost:5001/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
@@ -40,92 +40,61 @@ function Register() {
   };
 
   return (
-    <div
-      className="page-wrapper"
-      id="main-wrapper"
-      data-layout="vertical"
-      data-navbarbg="skin6"
-      data-sidebartype="full"
-      data-sidebar-position="fixed"
-      data-header-position="fixed"
-    >
-      <div className="position-relative overflow-hidden text-bg-light min-vh-100 d-flex align-items-center justify-content-center">
-        <div className="d-flex align-items-center justify-content-center w-100">
-          <div className="row justify-content-center w-100">
-            <div className="col-md-8 col-lg-6 col-xxl-3">
-              <div className="card mb-0">
-                <div className="card-body">
-                  <Link
-                    to="/"
-                    className="text-nowrap logo-img text-center d-block py-3 w-100"
-                  >
-                    <img
-                      src="../assets/images/logos/logo.svg"
-                      alt="logo"
-                    />
-                  </Link>
-
-                  <p className="text-center">Your Social Campaigns</p>
-
-                  {error && (
-                    <div className="alert alert-danger">{error}</div>
-                  )}
-
-                  <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
-                      <label className="form-label">Name</label>
-                      <input
-                        type="text"
-                        className="form-control"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                      />
-                    </div>
-
-                    <div className="mb-3">
-                      <label className="form-label">Email Address</label>
-                      <input
-                        type="email"
-                        className="form-control"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                      />
-                    </div>
-
-                    <div className="mb-4">
-                      <label className="form-label">Password</label>
-                      <input
-                        type="password"
-                        className="form-control"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2"
-                    >
-                      Sign Up
-                    </button>
-
-                    <div className="d-flex align-items-center justify-content-center">
-                      <p className="fs-4 mb-0 fw-bold">
-                        Already have an Account?
-                      </p>
-                      <Link
-                        className="text-primary fw-bold ms-2"
-                        to="/login"
-                      >
-                        Sign In
-                      </Link>
-                    </div>
-                  </form>
-
-                </div>
-              </div>
-            </div>
+    <div className="auth-background">
+      <div className="card premium-card p-5" style={{ width: 450 }}>
+        <div className="brand-logo d-flex align-items-center justify-content-center mb-4 gap-2">
+          <div className="bg-primary rounded-circle d-flex align-items-center justify-content-center" style={{ width: 35, height: 35 }}>
+            <i className="ti ti-school text-white fs-5"></i>
           </div>
+          <h4 className="mb-0 text-gradient fw-bolder">OnlineReg</h4>
+        </div>
+
+        <h3 className="text-center mb-2 font-weight-bold">Create Account</h3>
+        <p className="text-center text-muted mb-4">Join our learning community today</p>
+
+        {error && <div className="alert alert-danger border-0 shadow-sm mb-4">{error}</div>}
+
+        <form onSubmit={handleSubmit}>
+          <div className="mb-3">
+            <label className="form-label font-weight-bold small text-uppercase tracking-wider">Full Name</label>
+            <input
+              type="text"
+              className="form-control"
+              placeholder="John Doe"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-3">
+            <label className="form-label font-weight-bold small text-uppercase tracking-wider">Email Address</label>
+            <input
+              type="email"
+              className="form-control"
+              placeholder="name@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="mb-4">
+            <label className="form-label font-weight-bold small text-uppercase tracking-wider">Password</label>
+            <input
+              type="password"
+              className="form-control"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <button type="submit" className="btn-premium w-100 mt-2">Sign Up</button>
+        </form>
+
+        <div className="text-center mt-4">
+          <p className="mb-0">
+            Already have an account? <Link className="text-primary font-weight-bold ms-1" to="/login">Sign In</Link>
+          </p>
         </div>
       </div>
     </div>

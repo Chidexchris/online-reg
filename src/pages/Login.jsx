@@ -20,7 +20,7 @@ function Login() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "http://localhost:5001/api/auth/login",
         { email, password }
       );
 
@@ -38,41 +38,42 @@ function Login() {
   };
 
   return (
-    <div className="page-wrapper">
-      <div className="min-vh-100 d-flex align-items-center justify-content-center">
-        <div className="card p-4" style={{ width: 400 }}>
-          <h4 className="text-center mb-3">Login</h4>
+    <div className="auth-background">
+      <div className="card premium-card p-5" style={{ width: 450 }}>
+        <h2 className="text-center mb-4 text-gradient font-weight-bold">Welcome Back</h2>
+        <p className="text-center text-muted mb-4">Please enter your details to sign in</p>
 
-          {error && <div className="alert alert-danger">{error}</div>}
+        {error && <div className="alert alert-danger border-0 shadow-sm mb-4">{error}</div>}
 
-          <form onSubmit={handleSubmit}>
-            <div className="mb-3">
-              <label>Email</label>
-              <input
-                className="form-control"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="form-label font-weight-bold small text-uppercase tracking-wider">Email Address</label>
+            <input
+              className="form-control"
+              type="email"
+              placeholder="name@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
 
-            <div className="mb-3">
-              <label>Password</label>
-              <input
-                className="form-control"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+          <div className="mb-4">
+            <label className="form-label font-weight-bold small text-uppercase tracking-wider">Password</label>
+            <input
+              className="form-control"
+              type="password"
+              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
 
-            <button className="btn btn-primary w-100">Login</button>
-          </form>
+          <button className="btn-premium w-100 mt-2">Sign In</button>
+        </form>
 
-          <p className="text-center mt-3">
-            No account? <Link to="/register">Register</Link>
-          </p>
-        </div>
+        <p className="text-center mt-4 mb-0">
+          Don't have an account? <Link to="/register" className="text-primary font-weight-bold">Create Account</Link>
+        </p>
       </div>
     </div>
   );
