@@ -3,6 +3,7 @@ import Sidebar from "../../includes/Sidebar";
 import Header from "../../includes/Header";
 import axios from "axios";
 import { getToken } from "../../utils/auth";
+import { API_URL } from "../../config";
 
 function MyRegistration() {
   const [courses, setCourses] = useState([]);
@@ -11,7 +12,7 @@ function MyRegistration() {
   const fetchMyCourses = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5001/api/courses/my",
+        `${API_URL}/api/courses/my`,
         {
           headers: { Authorization: `Bearer ${getToken()}` }
         }
@@ -29,7 +30,7 @@ function MyRegistration() {
 
     try {
       await axios.delete(
-        `http://localhost:5001/api/courses/${id}/drop`,
+        `${API_URL}/api/courses/${id}/drop`,
         {
           headers: { Authorization: `Bearer ${getToken()}` }
         }

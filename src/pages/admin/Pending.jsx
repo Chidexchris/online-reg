@@ -3,6 +3,7 @@ import SideBar from "../../components/SideBar"
 import Header from "../../includes/Header";
 import axios from "axios";
 import { getToken } from "../../utils/auth";
+import { API_URL } from "../../config";
 
 function Pending() {
   const [pending, setPending] = useState([]);
@@ -11,7 +12,7 @@ function Pending() {
   const fetchPending = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5001/api/admin/pending",
+        `${API_URL}/api/admin/pending`,
         {
           headers: {
             Authorization: `Bearer ${getToken()}`
@@ -29,7 +30,7 @@ function Pending() {
   const approveCourse = async (id) => {
     try {
       await axios.put(
-        `http://localhost:5001/api/admin/approve/${id}`,
+        `${API_URL}/api/admin/approve/${id}`,
         {},
         {
           headers: {

@@ -3,6 +3,7 @@ import SideBar from "../../components/SideBar";
 import Header from "../../includes/Header";
 import axios from "axios";
 import { getToken } from "../../utils/auth";
+import { API_URL } from "../../config";
 
 function Registered() {
   const [registered, setRegistered] = useState([]);
@@ -11,7 +12,7 @@ function Registered() {
   const fetchRegistered = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:5001/api/admin/registered",
+        `${API_URL}/api/admin/registered`,
         {
           headers: {
             Authorization: `Bearer ${getToken()}`
