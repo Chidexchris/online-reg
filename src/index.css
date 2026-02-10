@@ -127,6 +127,11 @@ body {
     width: 100% !important;
   }
 
+  .page-wrapper {
+    padding: 1rem !important;
+    /* Reduce padding from 2rem to 1rem on mobile */
+  }
+
   /* Dim overlay when sidebar is open (optional but good for UX) */
   .show-sidebar::before {
     content: '';

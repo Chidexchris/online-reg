@@ -59,7 +59,7 @@ function Header() {
             </li>
           </ul>
 
-          <div className="navbar-collapse justify-content-end px-0" id="navbarNav">
+          <div className="navbar-collapse justify-content-end px-0 d-flex" id="navbarNav">
             <ul className="navbar-nav flex-row ms-auto align-items-center justify-content-end gap-3">
               <li className="nav-item dropdown">
                 <a className="nav-link p-2 bg-light rounded-circle shadow-none" href="javascript:void(0)" id="drop1" data-bs-toggle="dropdown">

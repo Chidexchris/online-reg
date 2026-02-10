@@ -69,7 +69,7 @@ function Dashboard() {
               <div className="row">
                 <div className="col-lg-8">
                   <div className="premium-card h-100 border-0 shadow-lg">
-                    <div className="card-body p-5">
+                    <div className="card-body p-3 p-md-5">
                       <div className="d-flex align-items-center justify-content-between mb-5">
                         <h4 className="fw-bold mb-0 text-dark">My Academic Journey</h4>
                         <span className="badge bg-primary-light text-primary px-3 py-2 rounded-pill fw-bold small">Semester 2 / 2025</span>
@@ -105,7 +105,7 @@ function Dashboard() {
                     <div className="position-absolute top-0 end-0 p-3 opacity-10">
                       <i className="ti ti-trophy fs-10"></i>
                     </div>
-                    <div className="card-body p-5 position-relative z-index-1">
+                    <div className="card-body p-3 p-md-5 position-relative z-index-1">
                       <h4 className="fw-bold text-white mb-4">Student Status</h4>
                       <div className="d-flex align-items-center gap-3 mb-4">
                         <div className="bg-white bg-opacity-25 p-3 rounded-circle text-white">

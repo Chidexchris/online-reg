@@ -69,7 +69,7 @@ function Dashboard() {
               <div className="row">
                 <div className="col-lg-12">
                   <div className="premium-card">
-                    <div className="card-body p-5">
+                    <div className="card-body p-3 p-md-5">
                       <div className="d-sm-flex align-items-center justify-content-between mb-4">
                         <h4 className="fw-bold mb-0">System Activity</h4>
                         <div className="d-flex gap-3">
@@ -79,7 +79,7 @@ function Dashboard() {
                           </select>
                         </div>
                       </div>
-                      <div className="p-5 border-dashed rounded-3 text-center border-2 bg-light bg-opacity-10">
+                      <div className="p-3 p-md-5 border-dashed rounded-3 text-center border-2 bg-light bg-opacity-10">
                         <i className="ti ti-chart-area-line fs-10 text-muted opacity-25 mb-3 d-block"></i>
                         <h5 className="text-muted">Analytical charts are being updated...</h5>
                       </div>
