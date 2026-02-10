@@ -4,6 +4,13 @@ import logo from "/assets/images/logos/logo.svg";
 import Courses from "../pages/user/Courses";
 
 function Sidebar() {
+  const handleCloseSidebar = () => {
+    const mainWrapper = document.getElementById('main-wrapper');
+    if (mainWrapper) {
+      mainWrapper.classList.remove('show-sidebar');
+    }
+  };
+
   return (
     <>
       <aside className="left-sidebar top-0">
@@ -17,7 +24,11 @@ function Sidebar() {
               <h3 className="mb-0 text-gradient fw-bolder tracking-tight">RegPortal</h3>
             </Link>
 
-            <div className="close-btn d-xl-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
+            <div
+              className="close-btn d-xl-none d-block sidebartoggler cursor-pointer"
+              id="sidebarCollapse"
+              onClick={handleCloseSidebar}
+            >
               <i className="ti ti-x fs-6"></i>
             </div>
           </div>

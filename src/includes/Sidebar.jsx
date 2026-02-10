@@ -11,6 +11,14 @@ function Sidebar() {
     logout();
     navigate('/login');
   };
+
+  const handleCloseSidebar = () => {
+    const mainWrapper = document.getElementById('main-wrapper');
+    if (mainWrapper) {
+      mainWrapper.classList.remove('show-sidebar');
+    }
+  };
+
   return (
     <>
       <aside className="left-sidebar top-0">
@@ -24,6 +32,7 @@ function Sidebar() {
             <div
               className="close-btn d-xl-none d-block sidebartoggler cursor-pointer"
               id="sidebarCollapse"
+              onClick={handleCloseSidebar}
             >
               <i className="ti ti-x fs-6"></i>
             </div>

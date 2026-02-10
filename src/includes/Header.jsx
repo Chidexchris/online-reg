@@ -11,13 +11,34 @@ function Header() {
     navigate('/login');
   };
 
+  const handleSidebarToggle = () => {
+    const mainWrapper = document.getElementById('main-wrapper');
+    if (mainWrapper) {
+      if (window.innerWidth < 1200) {
+        mainWrapper.classList.toggle('show-sidebar');
+      } else {
+        mainWrapper.classList.toggle('mini-sidebar');
+        if (mainWrapper.classList.contains('mini-sidebar')) {
+          mainWrapper.setAttribute('data-sidebartype', 'mini-sidebar');
+        } else {
+          mainWrapper.setAttribute('data-sidebartype', 'full');
+        }
+      }
+    }
+  };
+
   return (
     <>
       <header className="app-header position-sticky top-0 glass shadow-sm" style={{ zIndex: 10 }}>
         <nav className="navbar navbar-expand-lg navbar-light px-4 py-3">
           <ul className="navbar-nav align-items-center">
             <li className="nav-item d-block d-xl-none">
-              <a className="nav-link sidebartoggler p-2 rounded-circle" id="headerCollapse" href="javascript:void(0)">
+              <a
+                className="nav-link sidebartoggler p-2 rounded-circle"
+                id="headerCollapse"
+                href="javascript:void(0)"
+                onClick={handleSidebarToggle}
+              >
                 <i className="ti ti-menu-2 fs-6"></i>
               </a>
             </li>
