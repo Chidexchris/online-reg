@@ -64,6 +64,7 @@ body {
 
 .text-gradient {
   background: linear-gradient(135deg, var(--primary) 0%, #3b82f6 100%);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -103,5 +104,38 @@ body {
 @media (min-width: 1200px) {
   #main-wrapper[data-sidebar-position="fixed"] .body-wrapper {
     margin-left: 270px;
+  }
+}
+
+/* Mobile Sidebar Styles */
+@media (max-width: 1199px) {
+  .left-sidebar {
+    left: -270px;
+    position: fixed;
+    transition: left 0.3s ease-in-out;
+    z-index: 100 !important;
+    /* Ensure it's above other content */
+    height: 100vh;
+  }
+
+  .left-sidebar.show-sidebar {
+    left: 0;
+  }
+
+  .body-wrapper {
+    margin-left: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Dim overlay when sidebar is open (optional but good for UX) */
+  .show-sidebar::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
   }
 }
